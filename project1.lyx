@@ -1,0 +1,1941 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\begin_modules
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\bar under
+PROBLEM-2
+\end_layout
+
+\begin_layout Standard
+In this problem we have worked with the grayscale image of P.C.
+ Mahalanobis.
+ Then we have performed image compression using Vector Quantization by the
+ help of the clustering algorithm K-means which is also known as 
+\begin_inset Quotes eld
+\end_inset
+
+Llyod's algorithm
+\begin_inset Quotes erd
+\end_inset
+
+ in computer science and engineering.
+\end_layout
+
+\begin_layout Standard
+Before proceeding let us check the K-means algorithm and image vector quantizati
+on.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+K-MEANS ALGORITHM
+\end_layout
+
+\begin_layout Standard
+K-means is one of the most popular partitioning methods of clustering.
+ It performs a non-hierarchical clustering and groups the observations of
+ a dataset into a given number of clusters with the view to minimize the
+ within-cluster scatter/variation due to the clustering process.
+ 
+\end_layout
+
+\begin_layout Standard
+Suppose we have 
+\begin_inset Formula $n$
+\end_inset
+
+ observations 
+\begin_inset Formula $x_{1},x_{2},...,x_{n}\epsilon\mathbb{R}^{p}$
+\end_inset
+
+ and a measure 
+\begin_inset Formula $d_{ij}=d(x_{i},x_{j})$
+\end_inset
+
+ of dissimilarity between 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{j},$
+\end_inset
+
+ for every 
+\begin_inset Formula $i,j=1(1)n$
+\end_inset
+
+.
+ We may wish to group the 
+\begin_inset Formula $n$
+\end_inset
+
+ observations into 
+\begin_inset Formula $K$
+\end_inset
+
+ clusters.
+ A clustering of the above 
+\begin_inset Formula $n$
+\end_inset
+
+ observations can be thought of as a function 
+\begin_inset Formula $C$
+\end_inset
+
+ which assigns the cluster number for an observation, i.e, for an observation
+ 
+\begin_inset Formula $x_{i},$
+\end_inset
+
+ 
+\begin_inset Formula $C(x_{i})=k\epsilon\{1,2,...,K\}$
+\end_inset
+
+ denotes the cluster 
+\begin_inset Formula $k$
+\end_inset
+
+ to which 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is assigned during the clustering process.
+ We may, instead, simply denote by 
+\begin_inset Formula $C(i)$
+\end_inset
+
+, the cluster to which 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is assigned.
+\end_layout
+
+\begin_layout Standard
+Now, the within cluster scatter due to the above clustering is given by
+\begin_inset Formula 
+\[
+W=\frac{1}{2}\sum_{k=1}^{K}\frac{1}{n_{k}}\sum_{i:C(i)=k,}\sum_{j:C(j)=k}d_{ij}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $n_{k}$
+\end_inset
+
+ is the number of observations in the
+\begin_inset Formula $k^{th}$
+\end_inset
+
+ cluster, 
+\begin_inset Formula $k=1(1)K$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In particular, we may take 
+\begin_inset Formula $d_{ij}=\Vert x_{i}-x_{j}\Vert^{2}$
+\end_inset
+
+, the squared Euclidean Distance between the observations 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{j}$
+\end_inset
+
+.
+ Then, we have 
+\begin_inset Formula 
+\[
+W=\frac{1}{2}\sum_{k=1}^{K}\frac{1}{n_{k}}\sum_{i:C(i)=k}\sum_{,j:C(j)=k}\Vert x_{i}-x_{j}\Vert^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=\sum_{k=1}^{K}\frac{1}{n_{k}}\sum_{i:C(i)=k}\Vert x_{i}-\bar{x_{k}}\Vert^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where
+\begin_inset Formula 
+\[
+\bar{x_{k}}=\frac{1}{n_{k}}\sum_{i:C(i)=k}x_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+is the mean of the observations in the 
+\begin_inset Formula $k^{th}$
+\end_inset
+
+ cluster.
+\end_layout
+
+\begin_layout Standard
+This 
+\begin_inset Formula $W$
+\end_inset
+
+ is the within-cluster variation due to the above clustering.
+ Equivalently, we may choose to minimize
+\begin_inset Formula 
+\[
+W=\sum_{k=1}^{K}\frac{1}{n_{k}}\sum_{i:C(i)=k}\Vert x_{i}-c_{k}\Vert^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with respect to the clustering method 
+\begin_inset Formula $C$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{1},c_{2},...,c_{K}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+K-means attempts to find the clustering method 
+\begin_inset Formula $C$
+\end_inset
+
+ so as to approximately minimize this within cluster variation.
+ It runs in the following way:
+\end_layout
+
+\begin_layout Itemize
+We start with an initial guess for 
+\begin_inset Formula $c_{1},c_{2},...,c_{K}$
+\end_inset
+
+ (e.g., pick 
+\begin_inset Formula $K$
+\end_inset
+
+ points at random over the range of 
+\begin_inset Formula $x_{1},...,x_{K}$
+\end_inset
+
+), then:
+\end_layout
+
+\begin_layout Enumerate
+Minimize over 
+\begin_inset Formula $C$
+\end_inset
+
+: for each 
+\begin_inset Formula $i=1(1)n$
+\end_inset
+
+, find the cluster center 
+\begin_inset Formula $c_{k}$
+\end_inset
+
+ closest to 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ , and let 
+\begin_inset Formula $C(i)=k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Minimize over 
+\begin_inset Formula $c_{1},...,c_{K}:$
+\end_inset
+
+ for each 
+\begin_inset Formula $k=1(1)K$
+\end_inset
+
+, let 
+\begin_inset Formula $c_{k}=\bar{x_{k}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We repeat this process and stop when 
+\begin_inset Formula $W$
+\end_inset
+
+ does not change any more.
+\end_layout
+
+\begin_layout Standard
+Thus, one gets hold of a clustering method 
+\begin_inset Formula $C$
+\end_inset
+
+ to cluster the above 
+\begin_inset Formula $n$
+\end_inset
+
+ observations.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+VECTOR QUANTIZATION
+\end_layout
+
+\begin_layout Standard
+The K-means clustering algorithm represents a key tool in the apparently
+ unrelated area of image and signal compression, particularly in vector
+ quantization or VQ.
+ There are three stages to image vector quantization:
+\end_layout
+
+\begin_layout Itemize
+(Prototype Creation) Generally an image of mn pixels is represented in m
+ rows and n columns.
+ But here first we create arrays by grouping together q local pixels by
+ row (that is q adjacent pixels row-wise).
+ Then we have a collection of vectors V = {Vi, i = 1,2, 3,...., mn/q} where
+ each Vi is a q dimensional vector.
+ This V is called index and the elements Vi are called index entry.
+ Some of these vectors,Vi belonging to V , will be similar in some respects.
+ For example, many vectors may be extracted from a uniform area of an image.
+ This leads to the following idea.
+\end_layout
+
+\begin_layout Standard
+– Cluster vectors in V into r groups where(r << mn/q ).
+ The smaller the choice of r, the greater is the compression.
+\end_layout
+
+\begin_layout Standard
+– In other words, the set of vectors, V is partitioned into r distinct sets,
+ S1,S2,....,Sr corresponding to each cluster.
+\end_layout
+
+\begin_layout Standard
+– Each subset Si is then been represented by a suitable representative/prototype
+ vector (may be the cluster mean/mediod).
+ The set of prototype vectors constitutes the codebook.
+ Each of the member in the codebook is called codeword .
+ 
+\end_layout
+
+\begin_layout Standard
+– Thus codebook contains r vectors, each of which has an address,(1,2,...
+ r).
+ Because the number of selected elements is much smaller than the number
+ of vectors in the image, the number of bits required to represent the address
+ of a prototype vector is much smaller than the number of bits required
+ to represent an image vector.
+\end_layout
+
+\begin_layout Itemize
+(image compression) Now that the prototype vectors have been determined,
+ the next step of VQ consists of image compression and transmission.
+ Each vector in the original image is compared one-at-a-time to each of
+ the prototype vectors in the codebook.
+ The prototype that most closely resembles the input vector is selected,
+ and its address is transmitted/represented.
+ That is the compressed version of the image is only the codebook consisting
+ of r vectors (instead of mn/q vectors) each of which is q dimensional.
+\end_layout
+
+\begin_layout Itemize
+(image decompression) The final step of VQ consists of getting back the
+ image, which will be obviously an approximation to the original one.
+ i.e., a sequence of mn=q addresses, and decompressing it.
+ Each of themn=q vectors will be approximated by the corresponding prototype
+ vector in the codebook (that is the cluster center which it belongs to).
+\end_layout
+
+\begin_layout Standard
+Now we proceed with the grayscale image of P.C.
+ Mahalanobis.
+\end_layout
+
+\begin_layout Enumerate
+First we read the image in R and write a function to plot the original image
+ in R.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,echo=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+require(jpeg)
+\end_layout
+
+\begin_layout Plain Layout
+
+x=as.matrix(readJPEG("C:
+\backslash
+
+\backslash
+Users
+\backslash
+
+\backslash
+Souvik Saha
+\backslash
+
+\backslash
+Documents
+\backslash
+
+\backslash
+Study material
+\backslash
+
+\backslash
+Presidency University PG notes
+\backslash
+
+\backslash
+PG Sem3
+\backslash
+
+\backslash
+Applied Multivariate
+\backslash
+
+\backslash
+Project
+\backslash
+
+\backslash
+References
+\backslash
+
+\backslash
+PCM.jpg"))
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPic = function(y,title)
+\end_layout
+
+\begin_layout Plain Layout
+
+{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+dim(y) = c(430,346)
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(1:2,ty='n',main=title)
+\end_layout
+
+\begin_layout Plain Layout
+
+rasterImage(as.raster(y),1,1,2,2)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPic(x,"PCM")
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The R-Code for this is:-
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,eval=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+require(jpeg)
+\end_layout
+
+\begin_layout Plain Layout
+
+x=as.vector(readJPEG("C:
+\backslash
+
+\backslash
+Users
+\backslash
+
+\backslash
+Souvik Saha
+\backslash
+
+\backslash
+Documents
+\backslash
+
+\backslash
+Study material
+\backslash
+
+\backslash
+Presidency University PG notes
+\backslash
+
+\backslash
+PG Sem3
+\backslash
+
+\backslash
+Applied Multivariate
+\backslash
+
+\backslash
+Project
+\backslash
+
+\backslash
+References
+\backslash
+
+\backslash
+PCM.jpg"))
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPic = function(y,title)
+\end_layout
+
+\begin_layout Plain Layout
+
+{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+dim(y) = c(430,346)
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(1:2,ty='n',main=title)
+\end_layout
+
+\begin_layout Plain Layout
+
+rasterImage(as.raster(y),1,1,2,2)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPic(x,"PCM")
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Now we implement a version of VQ with the choice of q=4 and r=15.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,echo=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+#Prototype Creation
+\end_layout
+
+\begin_layout Plain Layout
+
+m=nrow(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+n=ncol(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+q=4
+\end_layout
+
+\begin_layout Plain Layout
+
+V=matrix(as.vector(t(x)),nrow=(m*n)/q,ncol=q,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+r=15
+\end_layout
+
+\begin_layout Plain Layout
+
+C=kmeans(V,r,algorithm="Lloyd",iter=600)
+\end_layout
+
+\begin_layout Plain Layout
+
+codebook=C$centers
+\end_layout
+
+\begin_layout Plain Layout
+
+#Image Compression & Decomposition
+\end_layout
+
+\begin_layout Plain Layout
+
+Z=codebook[C$clus,]
+\end_layout
+
+\begin_layout Plain Layout
+
+v.new=as.vector(t(Z))
+\end_layout
+
+\begin_layout Plain Layout
+
+x.new=matrix(v.new,nrow=m,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+dim(x.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+#Drawing the reconstructed image
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPic(x.new,"Reconstructed Image")
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The R code for this is:-
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,eval=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+#Prototype Creation
+\end_layout
+
+\begin_layout Plain Layout
+
+m=nrow(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+n=ncol(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+q=4
+\end_layout
+
+\begin_layout Plain Layout
+
+V=matrix(as.vector(t(x)),nrow=(m*n)/q,ncol=q,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+r=15
+\end_layout
+
+\begin_layout Plain Layout
+
+C=kmeans(V,r,algorithm="Lloyd",iter=600)
+\end_layout
+
+\begin_layout Plain Layout
+
+codebook=C$centers
+\end_layout
+
+\begin_layout Plain Layout
+
+#Image Compression & Decomposition
+\end_layout
+
+\begin_layout Plain Layout
+
+Z=codebook[C$clus,]
+\end_layout
+
+\begin_layout Plain Layout
+
+v.new=as.vector(t(Z))
+\end_layout
+
+\begin_layout Plain Layout
+
+x.new=matrix(v.new,nrow=m,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+dim(x.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+#Drawing the reconstructed image
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPic(x.new,"recon_photo")
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+Comments:-
+\end_layout
+
+\begin_layout Standard
+Since we are finding an approximation of the original image the reconstructed
+ image is a little blurred,hazy and less prominent than the actual one.
+\end_layout
+
+\begin_layout Standard
+3.Now we repeat the process of reconstructing the image for some choices
+ of r say 5,3,15,30,50,100,500.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,echo=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+recon.pic<-function(A,q,r)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+m=nrow(A)
+\end_layout
+
+\begin_layout Plain Layout
+
+n=ncol(A)
+\end_layout
+
+\begin_layout Plain Layout
+
+V=matrix(as.vector(t(A)),nrow=(m*n)/q,ncol=q,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+C=kmeans(V,r,algorithm="Lloyd",iter=600)
+\end_layout
+
+\begin_layout Plain Layout
+
+codebook=C$centers
+\end_layout
+
+\begin_layout Plain Layout
+
+Z=codebook[C$clus,]
+\end_layout
+
+\begin_layout Plain Layout
+
+v.new=as.vector(t(Z))
+\end_layout
+
+\begin_layout Plain Layout
+
+x.new=matrix(v.new,nrow=m,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+dim(x.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+PIC=drawPic(x.new,paste("R=",r))
+\end_layout
+
+\begin_layout Plain Layout
+
+return(PIC)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+par(mfrow=c(3,3))
+\end_layout
+
+\begin_layout Plain Layout
+
+R=c(3,5,15,30,50,100,500)
+\end_layout
+
+\begin_layout Plain Layout
+
+for(i in 1:length(R))
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	recon.pic(x,4,R[i])
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The R-Code for this is:-
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,eval=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+recon.pic<-function(A,q,r)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+m=nrow(A)
+\end_layout
+
+\begin_layout Plain Layout
+
+n=ncol(A)
+\end_layout
+
+\begin_layout Plain Layout
+
+V=matrix(as.vector(t(A)),nrow=(m*n)/q,ncol=q,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+C=kmeans(V,r,algorithm="Lloyd",iter=600)
+\end_layout
+
+\begin_layout Plain Layout
+
+codebook=C$centers
+\end_layout
+
+\begin_layout Plain Layout
+
+Z=codebook[C$clus,]
+\end_layout
+
+\begin_layout Plain Layout
+
+v.new=as.vector(t(Z))
+\end_layout
+
+\begin_layout Plain Layout
+
+x.new=matrix(v.new,nrow=m,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+dim(x.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+PIC=drawPic(x.new,paste("R=",r))
+\end_layout
+
+\begin_layout Plain Layout
+
+return(PIC)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+par(mfrow=c(3,3))
+\end_layout
+
+\begin_layout Plain Layout
+
+R=c(3,5,15,30,50,100,500)
+\end_layout
+
+\begin_layout Plain Layout
+
+for(i in 1:length(R))
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	recon.pic(x,4,R[i])
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+Comments:-
+\end_layout
+
+\begin_layout Standard
+We know a small value of r indicates large compression but greater approximation.
+Hence with the increase in r we see the reconstructed image is getting clearer
+ and exact with the original image i.e the blurriness in the image is decreasing.
+\end_layout
+
+\begin_layout Standard
+4.Now we calculate the Euclidean distance between the original image and
+ the estimated image and study the variation with changes in the value of
+ r.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,echo=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+#First we create a function for calculating the distance
+\end_layout
+
+\begin_layout Plain Layout
+
+euclid<-function(a,b)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	Dis=sqrt(sum((a-b)^2))
+\end_layout
+
+\begin_layout Plain Layout
+
+	return(Dis)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+#Now using this function we create another function for finding the Euclidean
+ distance for the images.
+\end_layout
+
+\begin_layout Plain Layout
+
+euclid.pic<-function(A,q,r)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+x=as.vector(t(A))
+\end_layout
+
+\begin_layout Plain Layout
+
+m=nrow(A);n=ncol(A)
+\end_layout
+
+\begin_layout Plain Layout
+
+V=matrix(as.vector(t(A)),nrow=(m*n)/q,ncol=q,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+C=kmeans(V,r,algorithm="Lloyd",iter=600)
+\end_layout
+
+\begin_layout Plain Layout
+
+codebook=C$centers
+\end_layout
+
+\begin_layout Plain Layout
+
+Z=codebook[C$clus,]
+\end_layout
+
+\begin_layout Plain Layout
+
+v.new=as.vector(t(Z))
+\end_layout
+
+\begin_layout Plain Layout
+
+x.new=matrix(v.new,nrow=m,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+D=euclid(x,x.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+return(D)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+R.new=c(3,5,15,30,50,100,500)
+\end_layout
+
+\begin_layout Plain Layout
+
+dis=NULL
+\end_layout
+
+\begin_layout Plain Layout
+
+q=4
+\end_layout
+
+\begin_layout Plain Layout
+
+for(i in 1:length(R.new))
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	dis[i]=euclid.pic(x,q,R.new[i])
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+dis
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(R.new,dis,type="l",main='Variation of Distance with r')
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The R code for doing this is:-
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,eval=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+#First we create a function for calculating the distance
+\end_layout
+
+\begin_layout Plain Layout
+
+euclid<-function(a,b)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	Dis=sqrt(sum((a-b)^2))
+\end_layout
+
+\begin_layout Plain Layout
+
+	return(Dis)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+#Now using this function we create another function for finding the Euclidean
+ distance for the images.
+\end_layout
+
+\begin_layout Plain Layout
+
+euclid.pic<-function(A,q,r)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+x=as.vector(t(A))
+\end_layout
+
+\begin_layout Plain Layout
+
+m=nrow(A);n=ncol(A)
+\end_layout
+
+\begin_layout Plain Layout
+
+V=matrix(as.vector(t(A)),nrow=(m*n)/q,ncol=q,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+C=kmeans(V,r,algorithm="Lloyd",iter=600)
+\end_layout
+
+\begin_layout Plain Layout
+
+codebook=C$centers
+\end_layout
+
+\begin_layout Plain Layout
+
+Z=codebook[C$clus,]
+\end_layout
+
+\begin_layout Plain Layout
+
+v.new=as.vector(t(Z))
+\end_layout
+
+\begin_layout Plain Layout
+
+x.new=matrix(v.new,nrow=m,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+D=euclid(x,x.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+return(D)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+R.new=c(3,5,15,30,50,100,500)
+\end_layout
+
+\begin_layout Plain Layout
+
+dis=NULL
+\end_layout
+
+\begin_layout Plain Layout
+
+q=4
+\end_layout
+
+\begin_layout Plain Layout
+
+for(i in 1:length(R.new))
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	dis[i]=euclid.pic(x,q,R.new[i])
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+dis
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(R.new,dis,type="l",,main='Variation of Distance with r')
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+Comments:-
+\end_layout
+
+\begin_layout Standard
+The graph shows a sharp increase of the Euclidean distance between the original
+ and estimated images with increase in r.
+\end_layout
+
+\begin_layout Standard
+5.Now we repeat the process VQ keeping r fixed say at 15 and for different
+ values of q say (2,4,5,10,15)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,echo=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+recon.pic<-function(A,q,r)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+m=nrow(A);n=ncol(A)
+\end_layout
+
+\begin_layout Plain Layout
+
+V=matrix(as.vector(t(A)),nrow=(m*n)/q,ncol=q,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+C=kmeans(V,r,algorithm="Lloyd",iter=600)
+\end_layout
+
+\begin_layout Plain Layout
+
+codebook=C$centers
+\end_layout
+
+\begin_layout Plain Layout
+
+Z=codebook[C$clus,]
+\end_layout
+
+\begin_layout Plain Layout
+
+v.new=as.vector(t(Z))
+\end_layout
+
+\begin_layout Plain Layout
+
+x.new=matrix(v.new,nrow=m,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+dim(x.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+PIC=drawPic(x.new,paste("Q=",q))
+\end_layout
+
+\begin_layout Plain Layout
+
+return(PIC)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+Q=c(2,4,5,10,15)
+\end_layout
+
+\begin_layout Plain Layout
+
+r.new=15
+\end_layout
+
+\begin_layout Plain Layout
+
+par(mfrow=c(3,2))
+\end_layout
+
+\begin_layout Plain Layout
+
+for(i in 1:length(Q))
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	recon.pic(x,Q[i],r.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The R Code for this is:-
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,eval=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+recon.pic<-function(A,q,r)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+m=nrow(A);n=ncol(A)
+\end_layout
+
+\begin_layout Plain Layout
+
+V=matrix(as.vector(t(A)),nrow=(m*n)/q,ncol=q,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+C=kmeans(V,r,algorithm="Lloyd",iter=600)
+\end_layout
+
+\begin_layout Plain Layout
+
+codebook=C$centers
+\end_layout
+
+\begin_layout Plain Layout
+
+Z=codebook[C$clus,]
+\end_layout
+
+\begin_layout Plain Layout
+
+v.new=as.vector(t(Z))
+\end_layout
+
+\begin_layout Plain Layout
+
+x.new=matrix(v.new,nrow=m,byrow=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+dim(x.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+PIC=drawPic(x.new,paste("Q=",q))
+\end_layout
+
+\begin_layout Plain Layout
+
+return(PIC)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+Q=c(2,4,5,10,15)
+\end_layout
+
+\begin_layout Plain Layout
+
+r.new=15
+\end_layout
+
+\begin_layout Plain Layout
+
+par(mfrow=c(3,2))
+\end_layout
+
+\begin_layout Plain Layout
+
+for(i in 1:length(Q))
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	recon.pic(x,Q[i],r.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+Comments:-
+\end_layout
+
+\begin_layout Standard
+With the increase in the value of q we see the reconstructed images become
+ more hazy,blurred and less prominent with respect to the original image.
+\end_layout
+
+\begin_layout Standard
+6.Now we calculate the Euclidean distance between the original and reconstructed
+ images for various values of q.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,echo=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+R.new=15
+\end_layout
+
+\begin_layout Plain Layout
+
+dis=NULL
+\end_layout
+
+\begin_layout Plain Layout
+
+q=c(2,4,5,10,15)
+\end_layout
+
+\begin_layout Plain Layout
+
+for(i in 1:length(q))
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	dis[i]=euclid.pic(x,q[i],R.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+dis
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(q,dis,type="l",main='Variation of Euclidean Distance with q')
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The R code for this is:-
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<comment=NA,eval=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+R.new=15
+\end_layout
+
+\begin_layout Plain Layout
+
+dis=NULL
+\end_layout
+
+\begin_layout Plain Layout
+
+q=c(2,4,5,10,15)
+\end_layout
+
+\begin_layout Plain Layout
+
+for(i in 1:length(q))
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	dis[i]=euclid.pic(x,q[i],R.new)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+dis
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(q,dis,type="l",main='Variation of Euclidean Distance with q')
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+Comments:-
+\end_layout
+
+\begin_layout Standard
+There is a sharp decrease in the Euclidean distance between original and
+ estimated images with increase in the value of q.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+REFERENCES USED FOR THIS PROBLEM:-
+\end_layout
+
+\begin_layout Standard
+(a) The Elements of Statistical Learning, Hastie, Tibshirani, et.al.
+\end_layout
+
+\begin_layout Standard
+(b) Image compression using learned vector quantization, K.
+ Ferens, W.Lehn, and W.
+ Kinsner.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+ACKNOWLEDGEMENT
+\end_layout
+
+\begin_layout Standard
+I would like to thank Prof Atanu Kumar Ghosh and the authors of the books
+ and papers I have used as references for this project.
+\end_layout
+
+\end_body
+\end_document
